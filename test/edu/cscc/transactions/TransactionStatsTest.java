@@ -37,4 +37,17 @@ class TransactionStatsTest {
         assertEquals(1, transactionStats.totalRentals());
     }
 
+    @Test
+    public void itReturnsTheMostPopularMovie() {
+        String theMatrix = "The Matrix";
+        String fellowship = "Lord of the Rings: The Fellowship of the Ring";
+        TransactionStats transactionStats = new TransactionStats();
+        transactionStats.add(TransactionBuilder.create().withRentalName(theMatrix).build());
+        transactionStats.add(TransactionBuilder.create().withRentalName(theMatrix).build());
+        transactionStats.add(TransactionBuilder.create().withRentalName(fellowship).build());
+
+        assertEquals(3, transactionStats.totalRentals());
+        assertEquals(theMatrix, transactionStats.mostPopularMovie());
+    }
+
 }
