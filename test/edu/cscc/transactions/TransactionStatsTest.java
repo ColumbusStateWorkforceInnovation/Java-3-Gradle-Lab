@@ -76,4 +76,14 @@ class TransactionStatsTest {
 
         assertEquals(firstStore, transactionStats.bestStore());
     }
+
+    @Test
+    public void itReturnsTheTotalRevenue() {
+        TransactionStats transactionStats = new TransactionStats();
+        transactionStats.add(TransactionBuilder.create().withRentalCost(3.0).build());
+        transactionStats.add(TransactionBuilder.create().withRentalCost(3.0).build());
+        transactionStats.add(TransactionBuilder.create().withRentalCost(3.0).build());
+
+        assertEquals(9.0, transactionStats.totalRevenue());
+    }
 }
