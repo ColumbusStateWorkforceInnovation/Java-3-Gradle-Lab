@@ -27,4 +27,14 @@ class TransactionStatsTest {
         assertEquals(2, transactionStats.totalRentals());
     }
 
+    @Test
+    public void itCanAddATransactionToTheTransactionList() {
+        TransactionStats transactionStats= new TransactionStats();
+        Transaction transaction = TransactionBuilder.create().build();
+
+        transactionStats.add(transaction);
+
+        assertEquals(1, transactionStats.totalRentals());
+    }
+
 }
