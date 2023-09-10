@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TransactionStatsTest {
 
+    public static final String THE_MATRIX = "The Matrix";
+    public static final String FELLOWSHIP = "Lord of the Rings: The Fellowship of the Ring";
+
     @Test
     public void itReturnsZeroTotalRentalsWhenTheTransactionListIsEmpty() {
         TransactionStats transactionStats = new TransactionStats(new ArrayList<>());
@@ -39,15 +42,25 @@ class TransactionStatsTest {
 
     @Test
     public void itReturnsTheMostPopularMovie() {
-        String theMatrix = "The Matrix";
-        String fellowship = "Lord of the Rings: The Fellowship of the Ring";
         TransactionStats transactionStats = new TransactionStats();
-        transactionStats.add(TransactionBuilder.create().withRentalName(theMatrix).build());
-        transactionStats.add(TransactionBuilder.create().withRentalName(theMatrix).build());
-        transactionStats.add(TransactionBuilder.create().withRentalName(fellowship).build());
+        transactionStats.add(TransactionBuilder.create().withRentalName(THE_MATRIX).build());
+        transactionStats.add(TransactionBuilder.create().withRentalName(THE_MATRIX).build());
+        transactionStats.add(TransactionBuilder.create().withRentalName(FELLOWSHIP).build());
 
         assertEquals(3, transactionStats.totalRentals());
-        assertEquals(theMatrix, transactionStats.mostPopularMovie());
+        assertEquals(THE_MATRIX, transactionStats.mostPopularMovie());
     }
 
+    @Test
+    public void itReturnsTheBestEmployee() {
+        String employee1 = "33945809289";
+        String employee2 = "33945810408";
+
+        TransactionStats transactionStats = new TransactionStats();
+        transactionStats.add(TransactionBuilder.create().withRentalName(THE_MATRIX).withEmployeeId(employee1).build());
+        transactionStats.add(TransactionBuilder.create().withRentalName(THE_MATRIX).withEmployeeId(employee2).build());
+        transactionStats.add(TransactionBuilder.create().withRentalName(FELLOWSHIP).withEmployeeId(employee1).build());
+
+        assertEquals(employee1, transactionStats.bestEmployee());
+    }
 }
