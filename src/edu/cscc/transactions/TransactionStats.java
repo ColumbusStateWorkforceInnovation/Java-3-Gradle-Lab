@@ -63,18 +63,16 @@ public class TransactionStats {
     }
 
     private Optional<Map.Entry<String, List<Transaction>>> bestByCount(Map<String, List<Transaction>> rentalsGroupedByName) {
-        Optional<Map.Entry<String, List<Transaction>>> mostPopular =
-                rentalsGroupedByName.entrySet()
-                        .stream().max((first, second) -> {
-                            if (first.getValue().size() > second.getValue().size()) {
-                                return 1;
-                            } else if (first.getValue().size() < second.getValue().size()) {
-                                return -1;
-                            }
+        return rentalsGroupedByName.entrySet()
+                .stream().max((first, second) -> {
+                    if (first.getValue().size() > second.getValue().size()) {
+                        return 1;
+                    } else if (first.getValue().size() < second.getValue().size()) {
+                        return -1;
+                    }
 
-                            return 0;
-                        });
-        return mostPopular;
+                    return 0;
+                });
     }
 
     public List<Transaction> getTransactions() {
