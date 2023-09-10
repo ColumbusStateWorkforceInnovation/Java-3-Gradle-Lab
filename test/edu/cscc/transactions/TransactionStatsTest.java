@@ -57,10 +57,23 @@ class TransactionStatsTest {
         String employee2 = "33945810408";
 
         TransactionStats transactionStats = new TransactionStats();
-        transactionStats.add(TransactionBuilder.create().withRentalName(THE_MATRIX).withEmployeeId(employee1).build());
-        transactionStats.add(TransactionBuilder.create().withRentalName(THE_MATRIX).withEmployeeId(employee2).build());
-        transactionStats.add(TransactionBuilder.create().withRentalName(FELLOWSHIP).withEmployeeId(employee1).build());
+        transactionStats.add(TransactionBuilder.create().withEmployeeId(employee1).build());
+        transactionStats.add(TransactionBuilder.create().withEmployeeId(employee2).build());
+        transactionStats.add(TransactionBuilder.create().withEmployeeId(employee1).build());
 
         assertEquals(employee1, transactionStats.bestEmployee());
+    }
+
+    @Test
+    public void itReturnsTheBestStore() {
+        String firstStore = "39458";
+        String secondStore = "39123";
+
+        TransactionStats transactionStats = new TransactionStats();
+        transactionStats.add(TransactionBuilder.create().withStoreNumber(firstStore).build());
+        transactionStats.add(TransactionBuilder.create().withStoreNumber(firstStore).build());
+        transactionStats.add(TransactionBuilder.create().withStoreNumber(secondStore).build());
+
+        assertEquals(firstStore, transactionStats.bestStore());
     }
 }
